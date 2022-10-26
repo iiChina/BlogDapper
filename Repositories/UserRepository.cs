@@ -7,11 +7,7 @@ using Microsoft.Data.SqlClient;
 namespace BlogDapper.Repositories
 {
     public class UserRepository : Repository<User>
-    {
-        private readonly SqlConnection _connection;
-        public UserRepository(SqlConnection connection) : base(connection) 
-            => _connection = connection;
-        
+    {   
         public List<User> GetWithRoles()
         {
             var query = @"
@@ -25,7 +21,7 @@ namespace BlogDapper.Repositories
 
             var users = new List<User>();
 
-            var items = _connection.Query<User, Role, User>(query, (user, role) => {
+            var items = Database.connection.Query<User, Role, User>(query, (user, role) => {
                 var usr = users.FirstOrDefault(x => x.Id == user.Id);
                 if(usr == null)
                 {
