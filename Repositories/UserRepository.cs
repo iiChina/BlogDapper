@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BlogDapper.Models;
@@ -12,8 +13,7 @@ namespace BlogDapper.Repositories
         {
             var query = @"
                 SELECT 
-                    [User].*,
-                    [Role].*
+                    [User].Name, [User].Email, [Role].Id, [Role].Name
                 FROM 
                     [User]
                     LEFT JOIN [UserRole] ON [UserRole].[UserId] = [User].[Id]
@@ -23,6 +23,7 @@ namespace BlogDapper.Repositories
 
             var items = Database.connection.Query<User, Role, User>(query, (user, role) => {
                 var usr = users.FirstOrDefault(x => x.Id == user.Id);
+
                 if(usr == null)
                 {
                     usr = user;

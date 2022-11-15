@@ -1,5 +1,9 @@
 ﻿using System;
+using BlogDapper.Screens.CategoryScreens;
+using BlogDapper.Screens.PostScreens;
+using BlogDapper.Screens.RoleScreens;
 using BlogDapper.Screens.TagScreens;
+using BlogDapper.Screens.UserScreens;
 using Microsoft.Data.SqlClient;
 
 namespace BlogDapper
@@ -38,10 +42,19 @@ namespace BlogDapper
             switch(option)
             {
                 case 1: 
-                    // UserTagScreen.Load();
+                    MenuUserScreen.Load();
+                    break;
+                case 2:
+                    MenuRoleScreen.Load();
+                    break;
+                case 3:
+                    MenuCategoryScreen.Load();
                     break;
                 case 4: 
                     MenuTagScreen.Load();
+                    break;
+                case 6: 
+                    MenuPostScreen.Load();
                     break;
                 default: Load(); break;
             }
